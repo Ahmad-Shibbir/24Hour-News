@@ -1,1 +1,1 @@
-console.log("inside 24 hour news js file")
+console.log("inside 24 hour news js file");
