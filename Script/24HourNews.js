@@ -7,9 +7,9 @@ const LoadNewsCatagory = () => {
 LoadNewsCatagory();
 const newsCategory = catagories =>{
 
-    
+    const newsCategorySection = document.getElementById("news-catagories");
     catagories.forEach(catagory => {
-        const newsCategorySection = document.getElementById("news-catagories");
+        
         const newsCategoryDiv = document.createElement('div');
         newsCategoryDiv.classList.add('inline')
         newsCategoryDiv.innerHTML=`
@@ -29,10 +29,50 @@ function loadSingleCatagoryNews(categoryId){
 }
 
 const displayNewse = newsForSingleCategories =>{
+    const newsCard = document.getElementById('news-card');
+    newsCard.innerHTML ='';
     newsForSingleCategories.forEach(newsForSingleCategorie => {
-        const {author, details ,image_url,rating }= newsForSingleCategorie;
 
-        console.log(details,author,image_url)
+        const {author, details ,thumbnail_url,total_view,title }= newsForSingleCategorie;        
+        const newsDiv = document.createElement('div');
+        newsDiv.innerHTML = `
+      <div class="gid grid-cols-2 card card-side bg-base-100 shadow-xl mt-5">
+      <figure class="col-span-2"><img class="h-80 w-72" src="${thumbnail_url}" alt="Movie"></figure>
+      <div class="card-body col-span-2">
+        <h2 class="card-title">${title}</h2>
+        <p>${details}</p>
+        <div>
+          <div class="grid grid-cols-3 items-center gap-8 font-bold">
+            <div id="author" class="flex gap-2">
+              <div class="avatar">
+                <div class="w-24 mask mask-squircle">
+                  <img src="${author.img}" />
+                </div>
+              </div>
+             <div class="m-2">
+              <p class=" text-bold">${author.name}</p>
+              <p>${author.published_date}</p>
+             </div> 
+            </div>
+            <p class="text-2xl"><i class="fa-solid fa-eye"></i> ${total_view}</p>
+            <i onclick="modal()"class=" text-2xl fa-solid fa-arrow-right-long"></i> 
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+
+
+
+
+
+
+
+
+
+        `
+        newsCard.appendChild(newsDiv);
     });
    
 }
