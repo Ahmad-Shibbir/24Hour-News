@@ -55,7 +55,7 @@ const displayNewse = newsForSingleCategories =>{
              </div> 
             </div>
             <p class="text-2xl"><i class="fa-solid fa-eye"></i> ${total_view}</p>
-            <label for="my-modal-3" class="btn modal-button"><i   class=" text-2xl fa-solid fa-arrow-right-long"></i> </label>
+            <label onclick="modal('${_id}')" for="my-modal-3" class="btn modal-button"><i   class=" text-2xl fa-solid fa-arrow-right-long"></i> </label>
            
           </div>
         </div>
@@ -77,7 +77,19 @@ function modal(news_id){
 }
 
 const newsInModal = singleNewses=>{
-    // singleNewses.forEach(singleNews => {
-    //     console.log(singleNews)
-    // });
+    const modalContantHolder = document.getElementById("Modal-Contant-holder");
+    modalContantHolder.innerHTML ='';
+    singleNewses.forEach(singleNews => {
+        const {author, details ,thumbnail_url,total_view,title,_id }= singleNews;
+        
+        const newDivInModal = document.createElement('div')
+        newDivInModal.innerHTML=  `
+        <h2 class="card-title mb-5">${title}</h2>
+        <p class=" text-bold">${author.name}</p>
+        <p>${author.published_date}</p>
+        <p>${details}</p>
+          `
+        modalContantHolder.appendChild(newDivInModal)
+        console.log(details)
+    });
 }
