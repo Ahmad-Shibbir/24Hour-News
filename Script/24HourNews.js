@@ -33,7 +33,7 @@ const displayNewse = newsForSingleCategories =>{
     newsCard.innerHTML ='';
     newsForSingleCategories.forEach(newsForSingleCategorie => {
 
-        const {author, details ,thumbnail_url,total_view,title }= newsForSingleCategorie;        
+        const {author, details ,thumbnail_url,total_view,title,_id }= newsForSingleCategorie;        
         const newsDiv = document.createElement('div');
         newsDiv.innerHTML = `
       <div class="gid grid-cols-2 card card-side bg-base-100 shadow-xl mt-5">
@@ -55,24 +55,29 @@ const displayNewse = newsForSingleCategories =>{
              </div> 
             </div>
             <p class="text-2xl"><i class="fa-solid fa-eye"></i> ${total_view}</p>
-            <i onclick="modal()"class=" text-2xl fa-solid fa-arrow-right-long"></i> 
+            <label for="my-modal-3" class="btn modal-button"><i   class=" text-2xl fa-solid fa-arrow-right-long"></i> </label>
+           
           </div>
         </div>
         
       </div>
       
-    </div>
-
-
-
-
-
-
-
-
-
-        `
+    </div>    `
         newsCard.appendChild(newsDiv);
     });
    
+}
+
+
+function modal(news_id){
+    fetch(`https://openapi.programming-hero.com/api/news/${news_id}`)
+    .then(res => res.json())
+    .then(data => newsInModal(data.data));
+    
+}
+
+const newsInModal = singleNewses=>{
+    // singleNewses.forEach(singleNews => {
+    //     console.log(singleNews)
+    // });
 }
