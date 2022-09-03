@@ -14,8 +14,10 @@ togleLoader(true)
 const LoadNewsCatagory = () => {
     fetch('https://openapi.programming-hero.com/api/news/categories')
     .then(res => res.json())
-    .then(data => newsCategory(data.data.news_category));
+    .then(data => newsCategory(data.data.news_category))
+    .catch(error => console.log(error));
 }
+
 
 LoadNewsCatagory();
 
@@ -41,8 +43,8 @@ function loadSingleCatagoryNews(categoryId){
     fetch(`https://openapi.programming-hero.com/api/news/category/0${categoryId}`)
     // fetch(`https://openapi.programming-hero.com/api/news/category/01`)
     .then(res => res.json())
-    .then(data => displayNewse(data.data));
-    
+    .then(data => displayNewse(data.data))
+    .catch(error => console.log(error));
 }
 
 const displayNewse = newsForSingleCategories =>{
@@ -58,7 +60,7 @@ const displayNewse = newsForSingleCategories =>{
     newsForSingleCategories.forEach(newsForSingleCategorie => {
         const {author, details ,thumbnail_url,total_view,title,_id }= newsForSingleCategorie;  
         DivForNumberOFNews.innerHTML =`
-        <p class=" text-2xl bg-white text-black border border-sky-500 mt-5 p-4 rounded-lg">${newsForSingleCategories.length} items found for this category </p>
+        <p class=" text-2xl bg-white text-black border border-sky-500 mt-5 p-4 rounded-lg">${newsForSingleCategories.length ? newsForSingleCategories.length :console.log('NOOOOOOOOOOOO') } items found for this category </p>
         `
         numberOfNews.appendChild(DivForNumberOFNews)
 
@@ -81,7 +83,7 @@ const displayNewse = newsForSingleCategories =>{
               </div>
              <div class="m-2">
               <p class=" text-bold">${author.name ? author.name : "no data" }</p>
-              <p>${author.published_date}</p>
+              <p>${author.published_date ?author.published_date :"no data"}</p>
              </div> 
             </div>
             <p class="text-2xl"><i class="fa-solid fa-eye"></i> ${total_view}</p>
@@ -93,8 +95,9 @@ const displayNewse = newsForSingleCategories =>{
       </div>
       
     </div>    `
+    togleLoader(false);
         newsCard.appendChild(newsDiv);
-        togleLoader(false);
+        
     });
    
 }
@@ -103,7 +106,8 @@ const displayNewse = newsForSingleCategories =>{
 function modal(news_id){
     fetch(`https://openapi.programming-hero.com/api/news/${news_id}`)
     .then(res => res.json())
-    .then(data => newsInModal(data.data));
+    .then(data => newsInModal(data.data))
+    .catch(error => console.log(error));
     
 }
 
@@ -116,8 +120,8 @@ const newsInModal = singleNewses=>{
         const newDivInModal = document.createElement('div')
         newDivInModal.innerHTML=  `
         <h2 class="card-title mb-5">${title}</h2>
-        <p class=" text-bold">${author.name}</p>
-        <p>${author.published_date}</p>
+        <p class=" text-bold">${author.name ? author.name : "no data" }</p>
+        <p>${author.published_date ?author.published_date :"no data"}</p>
         <p>${details}</p>
           `
         modalContantHolder.appendChild(newDivInModal)
