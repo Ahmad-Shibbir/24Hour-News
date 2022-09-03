@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>24Hour News</title>
 
+<!-- css style for spinner -->
     <style>
       .loader {
         border: 16px solid #f3f3f3;
@@ -28,12 +29,16 @@
         100% { transform: rotate(360deg); }
       }
       </style>
-    
+      
+    <!-- tailwind and daisy UI link -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- font awesome link -->
     <script src="https://kit.fontawesome.com/11ee08f1bc.js" crossorigin="anonymous"></script>
+
 </head>
 <body class="mx-auto lg:p-10 md:p-8 sm:p-2 ">
+  <!-- navigation bar section -->
     <nav >
         <div class="navbar bg-base-100  ">
             <div class="flex-1">
@@ -42,24 +47,24 @@
             <div class=" lg:flex-none ">
               <ul class="menu menu-horizontal p-0">
                 <li><a href="index.html">News</a></li>
-                
                 <li><a href="blog.html">Blog</a></li>
               </ul>
             </div>
           </div>
     </nav>
+
+
     <main class="">
      
       <!-- news category section -->
       <section  id="news-catagories" class=" " >
-
       </section>
       
+      <!-- section for disply how many news found for every category -->
       <section id="number-of-news">
-        
       </section>
 
-
+      <!-- spinner -->
       <section class=" ">
         <div id="loader" class="loader m-10 p-10 hidden "></div>
         <!-- Progress bar -->        
@@ -67,34 +72,33 @@
           <progress class="  progress w-100"></progress>
         </div> -->
         
+        <!-- section for news card -->
         <section>
           <div id="news-card" class="" >
-         
-
           </div>
         </section>
         
       </section>
     </main>
-    
-    <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+    <!-- end  of main  -->
+
+    <!-- footer section -->
+    <footer class="footer  footer-center p-4 bg-base-300 text-base-content">
         <div>
           <p>Copyright 2022 24Hour News Ltd</p>
         </div>
-      </footer>
+    </footer>
 
-
-      <section>
-        
-      <input type="checkbox" id="my-modal-3" class="modal-toggle" />
-      <div class="modal">
-        <div class="modal-box relative">
-          <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-          <div id="Modal-Contant-holder" >
-
+    <!-- section for modal -->
+      <section>        
+        <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+        <div class="modal">
+          <div class="modal-box relative">
+            <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+            <div id="Modal-Contant-holder" >
+            </div>
           </div>
         </div>
-      </div>
       </section>
     <script src="Script/24HourNews.js"></script>
 </body>
