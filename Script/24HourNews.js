@@ -24,13 +24,13 @@ LoadNewsCatagory();
 const newsCategory = catagories =>{
 
     const newsCategorySection = document.getElementById("news-catagories");
-    
+  
     catagories.forEach(catagory => {
         
         const newsCategoryDiv = document.createElement('div');
-        newsCategoryDiv.classList.add('inline')
+        newsCategoryDiv.classList.add('lg:inline', 'flex' ,'flex-col')
         newsCategoryDiv.innerHTML=`
-        <button onclick="loadSingleCatagoryNews(${catagory.category_id}),togleLoader(true);" class="btn btn-ghost font-bold">${catagory.category_name}</button>
+        <button onclick="loadSingleCatagoryNews(${catagory.category_id}),togleLoader(true);" class="btn btn-ghost font-bold  ">${catagory.category_name}</button>
         `
         newsCategorySection.appendChild(newsCategoryDiv);
         togleLoader(false)
@@ -54,27 +54,31 @@ const displayNewse = newsForSingleCategories =>{
     const DivForNumberOFNews = document.createElement('div')
     const newsCard = document.getElementById('news-card');
     newsCard.innerHTML ='';
+    DivForNumberOFNews.innerHTML =`
+    <p class=" lg:text-2xl bg-white text-black border border-sky-500 mt-5 p-4 rounded-lg">${newsForSingleCategories.length   ? newsForSingleCategories.length : 'no' } items found for this category </p>
+    `;
+    numberOfNews.appendChild(DivForNumberOFNews);
+    newsForSingleCategories.sort(function(a,b){
+        return b.total_view - a.total_view;
+    })
+    
 
-   
 
     newsForSingleCategories.forEach(newsForSingleCategorie => {
         const {author, details ,thumbnail_url,total_view,title,_id }= newsForSingleCategorie;  
-        DivForNumberOFNews.innerHTML =`
-        <p class=" text-2xl bg-white text-black border border-sky-500 mt-5 p-4 rounded-lg">${newsForSingleCategories.length ? newsForSingleCategories.length :console.log('NOOOOOOOOOOOO') } items found for this category </p>
-        `
-        numberOfNews.appendChild(DivForNumberOFNews)
+     
 
 
              
         const newsDiv = document.createElement('div');
         newsDiv.innerHTML = `
-      <div class="gid grid-cols-2 card card-side bg-base-100 shadow-xl mt-5">
-      <figure class="col-span-2"><img class="h-80 w-72" src="${thumbnail_url}" alt="Movie"></figure>
-      <div class="card-body col-span-2">
+      <div class=" flex flex-col lg:flex-row card card-side bg-base-100 shadow-xl mt-5">
+      <figure class=""><img class="lg:h-80 lg:w-72  w-fit" src="${thumbnail_url}" alt="Movie"></figure>
+      <div class="card-body ">
         <h2 class="card-title">${title ? title :"no data"}</h2>
         <p>${details.slice(0,400)}...</p>
         <div>
-          <div class="grid grid-cols-3 items-center gap-8 font-bold">
+          <div class="grid grid-cols-1 lg:grid-cols-3 items-center gap-8 font-bold">
             <div id="author" class="flex gap-2">
               <div class="avatar">
                 <div class="w-24 mask mask-squircle">
@@ -95,11 +99,11 @@ const displayNewse = newsForSingleCategories =>{
       </div>
       
     </div>    `
-    togleLoader(false);
+   
         newsCard.appendChild(newsDiv);
         
     });
-   
+    togleLoader(false);
 }
 
 
